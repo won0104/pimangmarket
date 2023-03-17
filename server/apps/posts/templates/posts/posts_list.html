@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>피망마켓 - 게시물 목록</title>
+    <link rel="stylesheet" href="{% static 'css/list.css'%}" />
+</head>
+
+<body>
+    <form action="{% url 'posts:list' %}" method="get">
+        <input name="min_price" placeholder="최소가격" />
+        <input name="max_price" placeholder="최대가격" />
+        <input type="submit" value="검색" />
+
+    </form>
+
+
+    </hr>
+
+    {% for post in posts %}
+
+    <article>
+        {%if post.photo %}
+        <P>
+            <img src="{{post.photo.url}}">
+        </P>
+        {%endif%}
+        <div>
+            <p><a href="{% url 'posts:retrieve' post.pk%}">{{post.title}}</a></p>
+            <small>{{post.user.name}}</small>
+            <small>{{post.region}}</small>
+            <p>{{ post.price }}</p>
+        </div>
+    </article>
+    <hr />
+    {% endfor %}
+
+    <a href="{% url 'posts:create' %}">
+        <img src="{%static 'image/plus.png'%}">
+    </a>
+</body>
+
+</html>

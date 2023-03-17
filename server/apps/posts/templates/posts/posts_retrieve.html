@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>피망마켓 - 게시글 상세</title>
+  <link rel="stylesheet" href="{% static 'css/retrieve.css'%}" />
+</head>
+
+<body>
+  <h1>{{post.title}}</h1>
+  <small>작성자:{{post.user.name}}</small><br />
+  <small>나이 :{{post.user.age}}</small><br />
+  <small>지역:{{post.region}}</small><br />
+  <small>가격:{{post.price}}</small><br />
+  <br />
+  <p>{{post.content}}</p>
+  <br />
+  <small>작성일:{{post.created_at}}</small><br />
+  <small>수정일:{{post.updated_at}}</small>
+  <br />
+  <br />
+  <small>이 작성자의 글</small>
+  {% for post in all_post %}
+  <a class="post" href="{% url 'posts:retrieve' post.id %}">{{ post.title }}</a>
+  {% endfor %}
+  <hr />
+  <div>
+    <a href="{% url 'posts:update' post.pk%}">수정하기</a>
+  </div>
+  <form action="{% url 'posts:delete' post.pk%}" method="post">
+    {% csrf_token %}
+    <input type="submit" , value="삭제하기" />
+  </form>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>피망마켓 - 게시글 작성</title>
+  <link rel="stylesheet" href="{% static 'css/create.css'%}" />
+</head>
+
+
+<body>
+  <h1>글 작성하기</h1>
+
+  <form action="{%url 'posts:create' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input name="title" placeholder="게시글 제목" />
+    <br />
+    <input type="file" name="photo" />
+    <br />
+    <input name="user" placeholder="작성자" />
+    <br />
+    <input name="region" placeholder="지역" />
+    <br />
+    <input name="price" placeholder="가격" type="number" />
+    <br />
+    <textarea name="content" placeholder="게시글 내용"></textarea>
+    <div>
+      <input type="submit" , value="저장하기" />
+    </div>
+  </form>
+</body>
+
+</html>

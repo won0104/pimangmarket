@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>피망마켓 - 게시글 수정</title>
+  <link rel="stylesheet" href="{% static 'css/update.css'%}" />
+</head>
+
+<body>
+  <h1>글 수정하기</h1>
+
+  <form action="{% url 'posts:update' post.pk%}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input name="title" placeholder="게시글 제목" value="{{post.title}}" />
+    <br />
+    <input type="file" name="photo" />
+    <br />
+    <input name="user" placeholder="작성자" value="{{post.user}}" />
+    <br />
+    <input name="region" placeholder="지역" value="{{post.region}}" />
+    <br />
+    <input name="price" placeholder="가격" type="number" value="{{post.price}}" />
+    <br />
+    <textarea name="content" placeholder="게시글 내용">
+{{post.content}}</textarea>
+    <div>
+      <input type="submit" , value="저장하기" />
+    </div>
+  </form>
+</body>
+
+</html>
